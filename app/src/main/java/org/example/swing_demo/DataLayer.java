@@ -14,6 +14,11 @@ public class DataLayer {
     private final Connection connection;
 
     public DataLayer() {
+        this(true);
+    }
+
+    public DataLayer(boolean addTestData) {
+        // docker run -it --rm -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 mysql
         String url = "jdbc:mysql://localhost:3306/";
         String username = "root";
         String password = "root";
@@ -31,6 +36,8 @@ public class DataLayer {
 
         try {
             connection = DriverManager.getConnection(url, username, password);
+            if (!addTestData)
+                return;
             connection.createStatement().execute(CREATE_TABLE);
             connection.createStatement().execute(INSERT_DATA);
             System.out.println("Successfully set up table and inserted test data");
