@@ -16,4 +16,11 @@ application {
     mainClass = 'org.example.swing_demo.App'
 }
 
+def populateDb = tasks.register('populateDb', JavaExec) {
+    classpath = java.sourceSets.main.runtimeClasspath
+    mainClass = 'org.example.swing_demo.DataLayer'
+}
+
+tasks.run { dependsOn(populateDb) }
+
 tasks.withType(Test) { t -> t.useJUnitPlatform() }
