@@ -96,5 +96,10 @@ public class DataLayer {
         public void setValue(String value) {
             this.value = value;
         }
+
+        @Override
+        public String toString() {
+            return value + " (" + id + ")";
+        }
     }
 }
